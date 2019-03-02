@@ -6,11 +6,14 @@ const eaddress = process.env.EADDRESS;
 const getCurrentTime = () => moment(Date.now());
 
 const sendEmail = (fileString) => {
-  let exc = `echo -e "to: ${eaddress}\nsubject: MOTION DETECTED: ${getCurrentTime()}\n"| ssmtp ${eaddress}`;
+  // TODO: Include weather details from city log
+  let exc = `echo -e "to: ${eaddress}\nsubject: WEATHER UPDATE: ${getCurrentTime()}\n"| ssmtp ${eaddress}`;
   exec(exc, (err, stdout, stderr) => {
     if (err || stderr) {
       const errorString = `${Date.now()}\n${err}`;
     }
+    console.log(stdout)
+    console.log('sending')
   });
 };
 
